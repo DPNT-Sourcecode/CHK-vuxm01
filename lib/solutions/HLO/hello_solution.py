@@ -1,8 +1,7 @@
 # noinspection PyUnusedLocal
 def hello(friend_name: str) -> str:
-    # Return a greeting that includes the friend's name
-    return f"Hello, {friend_name}!"
-
+    # Ignore the input and return "Hello, World!"
+    return "Hello, World!"
 # Test cases
 if __name__ == "__main__":
     # Test the function with a sample name
