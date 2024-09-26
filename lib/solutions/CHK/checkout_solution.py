@@ -6,13 +6,15 @@ def checkout(skus: str) -> int:
         'B': 30,
         'C': 20,
         'D': 15,
-        'E': 40
+        'E': 40,
+        'F': 10
     }
     
     # Define the special offers
     offers = {
         'A': [(5, 200), (3, 130)],  # 5 A's for 200, 3 A's for 130
         'B': (2, 45),               # 2 B's for 45
+        'F': (3, 20)                # 3 F's for 20 (buy 2, get 1 free)
     }
     
     # Count the frequency of each item in the input
@@ -49,6 +51,12 @@ def checkout(skus: str) -> int:
             offer_applies = count // offer_count
             remainder = count % offer_count
             total += offer_applies * offer_price + remainder * prices['B']
+        elif item == 'F' and 'F' in offers:
+            # Apply the offer for F (Buy 2, get 1 free)
+            offer_count, offer_price = offers['F']
+            offer_applies = count // offer_count
+            remainder = count % offer_count
+            total += offer_applies * offer_price + remainder * prices['F']
         else:
             # No special offer, just add the price for each item
             total += count * prices[item]
@@ -64,8 +72,11 @@ if __name__ == "__main__":
     assert checkout("AAABBB") == 205, "Test case 4 failed: expected 205"  # 130 for 3 A's, 45 for 2 B's, 30 for 1 B
     assert checkout("ABCDE") == 155, "Test case 5 failed: expected 155"  # Regular price for all items
     assert checkout("EEB") == 80, "Test case 6 failed: expected 80"  # 2 E's for 80, 1 B free
-
+    assert checkout("FFF") == 20, "Test case 7 failed: expected 20"  # 3 F's for 20 (Buy 2, get 1 free)
+    assert checkout("FFFFF") == 20, "Test case 8 failed: expected 30"  # 3 F's for 20, 2 F's for 20
+    assert checkout("FFFFFF") == 40, "Test case 9 failed: expected 40"  # 6 F's for 40 (2 free F's)
+    
     # Test for invalid input
-    assert checkout("E1") == -1, "Test case 7 failed: expected -1"
+    assert checkout("E1") == -1, "Test case 10 failed: expected -1"
     
     print("All tests passed!")
