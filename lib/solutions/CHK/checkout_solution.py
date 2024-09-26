@@ -63,7 +63,7 @@ def checkout(skus: str) -> int:
         if item in item_counts:
             group_discount_count += item_counts[item]
             group_discount_items_list.extend([item] * item_counts[item])
-    
+
     # Calculate total for the group discount
     group_discount_total = 0
     if group_discount_count >= 3:
@@ -75,9 +75,9 @@ def checkout(skus: str) -> int:
             group_discount_total += 45
             group_discount_items_list = group_discount_items_list[3:]
 
-        # Add remaining items that did not form a group of 3 at their individual prices
-        for item in group_discount_items_list:
-            group_discount_total += prices[item]
+    # Add remaining items that did not form a group of 3 at their individual prices
+    for item in group_discount_items_list:
+        group_discount_total += prices[item]
 
     # Calculate total price for all other items (ignoring group discount items)
     total = group_discount_total
@@ -124,5 +124,8 @@ if __name__ == "__main__":
     assert checkout("RRRQQQ") == 210, "Test case 13 failed"  # 3R for 150 + 1 Q free
     assert checkout("SXT") == 45, "Test case 14 failed"  # Group discount for 3 items (S, X, T)
     assert checkout("SSS") == 45, "Test case 15 failed"  # Group discount for 3 S's
+    assert checkout("S") == 20, "Test case 16 failed"  # Individual S
+    assert checkout("T") == 20, "Test case 17 failed"  # Individual T
+    assert checkout("X") == 17, "Test case 18 failed"  # Individual X
 
     print("All tests passed!")
