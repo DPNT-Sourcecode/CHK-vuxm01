@@ -73,7 +73,7 @@ if __name__ == "__main__":
     assert checkout("ABCDE") == 155, "Test case 5 failed: expected 155"  # Regular price for all items
     assert checkout("EEB") == 80, "Test case 6 failed: expected 80"  # 2 E's for 80, 1 B free
     assert checkout("FFF") == 20, "Test case 7 failed: expected 20"  # 3 F's for 20 (Buy 2, get 1 free)
-    assert checkout("FFFFF") == 20, "Test case 8 failed: expected 30"  # 3 F's for 20, 2 F's for 20
+    assert checkout("FFFFF") == 40, "Test case 8 failed: expected 40"  # 3 F's for 20, 2 F's for 20
     assert checkout("FFFFFF") == 40, "Test case 9 failed: expected 40"  # 6 F's for 40 (2 free F's)
     
     # Test for invalid input
